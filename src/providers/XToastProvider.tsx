@@ -1,6 +1,6 @@
 'use client';
 
-import Toast from '@/components/Modals/Toast';
+import XToast from '@/components/Modals/XToast';
 import { ToastContextType, ToastType } from '@/types/modal.type';
 import { createContext, PropsWithChildren, useContext, useState } from 'react';
 
@@ -12,7 +12,7 @@ const ToastContext = createContext(initialValue);
 
 export const useToast = (): ToastContextType => useContext(ToastContext);
 
-export function ToastProvider({ children }: PropsWithChildren) {
+export function XToastProvider({ children }: PropsWithChildren) {
     const [toasts, setToasts] = useState<ToastType[]>([]);
 
     const addToast = (toast: ToastType): void => {
@@ -35,7 +35,7 @@ export function ToastProvider({ children }: PropsWithChildren) {
         <ToastContext.Provider value={value}>
             <div className="z-10 fixed left-0 right-0 flex flex-col items-center">
                 {toasts.map((toast) => (
-                    <Toast key={toast.id} toast={toast} color={toast.color} />
+                    <XToast key={toast.id} toast={toast} onClose={() => removeToast(toast.id!)} />
                 ))}
             </div>
             {children}

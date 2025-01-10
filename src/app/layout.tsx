@@ -1,5 +1,6 @@
 import { ModalProvider } from '@/providers/ModalProvider';
 import { ToastProvider } from '@/providers/ToastProvider';
+import { XToastProvider } from '@/providers/XToastProvider';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import BackButtons from './_components/BackButtons';
@@ -25,12 +26,14 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={`${pretendard.variable} font-pretendard`}>
-                <ToastProvider>
-                    <ModalProvider>
-                        <BackButtons />
-                        {children}
-                    </ModalProvider>
-                </ToastProvider>
+                <XToastProvider>
+                    <ToastProvider>
+                        <ModalProvider>
+                            <BackButtons />
+                            {children}
+                        </ModalProvider>
+                    </ToastProvider>
+                </XToastProvider>
             </body>
         </html>
     );

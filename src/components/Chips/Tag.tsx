@@ -7,8 +7,8 @@ const chipVariant = cva(
     {
         variants: {
             state: {
-                pressed: 'bg-main400 text-white border-main600 cursor-default',
-                default: 'bg-white text-gray910 border-main200 hover:bg-main200 hover:border-main400 cursor-default',
+                pressed: 'bg-main400 text-white border-main600 cursor-pointer',
+                default: 'bg-white text-gray910 border-main200 hover:bg-main200 hover:border-main400 cursor-pointer',
                 disable: 'bg-gray100 text-gray500 border-gray300 cursor-not-allowed'
             },
             size: {
@@ -25,21 +25,28 @@ const chipVariant = cva(
 
 type ChipVariantProps = VariantProps<typeof chipVariant>;
 
-type ChipProps = { handleClickDeleteIcon?: () => void } & ChipVariantProps;
+type ChipProps = { handleClickText?: () => void; handleClickDeleteIcon?: () => void } & ChipVariantProps;
 
-const Tag = ({ children, state, size, handleClickDeleteIcon }: PropsWithChildren<ChipProps>) => {
-    return (
+const Tag = ({ children, state, size, handleClickText, handleClickDeleteIcon }: PropsWithChildren<ChipProps>) => {
+    return state === 'disable' ? (
         <div className={chipVariant({ state, size })}>
             {children || 'Tag'}
-            {state === 'disable' ? (
-                <span className="flex items-center justify-center cursor-not-allowed">
-                    <MdClose />
-                </span>
-            ) : (
-                <span onClick={handleClickDeleteIcon} className="flex items-center justify-center cursor-pointer">
-                    <MdClose />
-                </span>
-            )}
+            <span className="flex items-center justify-center">
+                <MdClose />
+            </span>
+        </div>
+    ) : (
+        <div onClick={handleClickText} className={chipVariant({ state, size })}>
+            {children || 'Tag'}
+            <span
+                onClick={(e) => {
+                    e.stopPropagation();
+                    if (handleClickDeleteIcon) handleClickDeleteIcon();
+                }}
+                className="flex items-center justify-center"
+            >
+                <MdClose />
+            </span>
         </div>
     );
 };
