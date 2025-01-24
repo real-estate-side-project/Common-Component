@@ -31,6 +31,12 @@ const PreviewList = () => {
             >
                 Chips Preview →
             </li>
+            <li
+                className="bg-white w-fit text-base font-semibold cursor-pointer hover:brightness-90 hover:scale-105 rounded-lg px-1 transition-all mb-2"
+                onClick={() => router.push('/pagination')}
+            >
+                Pagination Preview →
+            </li>
         </ul>
     );
 };
