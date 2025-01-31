@@ -14,7 +14,7 @@ const InputSample = () => {
         }
     });
 
-    const onSubmit = () => {
+    const onSubmit = (): void => {
         toast.on({ message: 'Form submitted successfully!' });
     };
 

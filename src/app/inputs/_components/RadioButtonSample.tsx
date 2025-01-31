@@ -1,8 +1,9 @@
 'use client';
 
 import RadioButton from '@/components/Inputs/RadioButton';
+import { useToast } from '@/providers/ToastProvider';
 import { RadioButtonOption } from '@/types/input.type';
-import { ChangeEvent, useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 
 const options: RadioButtonOption[] = [
     { label: 'Radio1', value: '1' },
@@ -11,31 +12,37 @@ const options: RadioButtonOption[] = [
 ];
 
 const RadioButtonSample = () => {
-    const [selectedValue, setSelectedValue] = useState<string | undefined>();
+    const toast = useToast();
 
-    const handleChangeValue = (e: ChangeEvent<HTMLInputElement>): void => {
-        setSelectedValue(e.target.value);
+    const methods = useForm({
+        defaultValues: {
+            radioGroup: 'option1'
+        }
+    });
+
+    const onSubmit = (): void => {
+        toast.on({ message: 'Form submitted successfully!' });
     };
 
     return (
-        <div className="flex flex-col gap-2 items-start justify-start border-2 p-6">
-            <h1 className="text-3xl font-bold">Radio Button</h1>
-            <RadioButton options={options} selectedValue={selectedValue} onChange={handleChangeValue} />
-            <RadioButton options={options} selectedValue={'1'} isDisabled />
-            <RadioButton
-                radioSize={'lg'}
-                options={options}
-                selectedValue={selectedValue}
-                onChange={handleChangeValue}
-            />
-            <RadioButton
-                groupStyle="flex flex-col gap-3"
-                radioSize={'lg'}
-                options={options}
-                selectedValue={'2'}
-                isDisabled
-            />
-        </div>
+        <FormProvider {...methods}>
+            <form
+                onSubmit={methods.handleSubmit(onSubmit)}
+                className="flex flex-col gap-2 items-start justify-start border-2 p-6"
+            >
+                <h1 className="text-3xl font-bold">Radio Button</h1>
+                <RadioButton name="radioGroup" options={options} />
+                <RadioButton name="radioGroup" options={options} isDisabled />
+                <RadioButton name="radioGroup" radioSize={'lg'} options={options} />
+                <RadioButton
+                    name="radioGroup"
+                    groupStyle="flex flex-col gap-3"
+                    radioSize={'lg'}
+                    options={options}
+                    isDisabled
+                />
+            </form>
+        </FormProvider>
     );
 };
 
