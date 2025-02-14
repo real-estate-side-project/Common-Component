@@ -24,15 +24,6 @@ const TagSample = () => {
                 <Tag state={intent} handleClickText={handleClickChip} handleClickDeleteIcon={handleClickClose} />
                 <Tag state={'disable'} />
             </div>
-            <div className="flex items-start justify-start gap-1">
-                <Tag
-                    state={intent}
-                    handleClickText={handleClickChip}
-                    size={'lg'}
-                    handleClickDeleteIcon={handleClickClose}
-                />
-                <Tag state={'disable'} size={'lg'} />
-            </div>
         </div>
     );
 };

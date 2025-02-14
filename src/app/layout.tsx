@@ -1,3 +1,4 @@
+import FAB from '@/components/FAB';
 import { ModalProvider } from '@/providers/ModalProvider';
 import { ToastProvider } from '@/providers/ToastProvider';
 import { XToastProvider } from '@/providers/XToastProvider';
@@ -31,6 +32,9 @@ export default function RootLayout({
                         <ModalProvider>
                             <BackButtons />
                             {children}
+                            <div className="mo:hidden">
+                                <FAB />
+                            </div>
                         </ModalProvider>
                     </ToastProvider>
                 </XToastProvider>
