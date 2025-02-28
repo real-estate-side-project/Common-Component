@@ -16,7 +16,7 @@ const FAB = () => {
     };
 
     return (
-        <div className="fixed bottom-20 right-20 flex flex-col justify-center items-center gap-5">
+        <div className="z-10 fixed bottom-20 right-20 flex flex-col justify-center items-center gap-5">
             <button
                 onClick={scrollToTop}
                 className="flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-md hover:brightness-95 transition-all"
